@@ -1,5 +1,5 @@
-#ifndef WeatherPriorityCalculatorHeaderDefined
-#define WeatherPriorityCalculatorHeaderDefined
+#ifndef WeatherPriorityCalculatorHeaderDefined _
+#define WeatherPriorityCalculatorHeaderDefined _
 #include "WeatherPriority.h"
 #include "Weather_data.h"
 const struct Bounds {
@@ -12,7 +12,7 @@ const struct Bounds TempBounds = { -18,20 };
 const struct Bounds WindBounds = { 0, 10.8f };
 const struct Bounds PressureBounds = { 740, 750 };
 WeatherPriority* CalculatePriotity(WeatherData* data) {
-	WeatherPriority* resultVector = malloc(sizeof(WeatherPriority) * 5);
+	WeatherPriority* resultVector = malloc(sizeof(WeatherPriority)*5);
 	for (int i = 0; i < 5; i++)
 		resultVector[i] = None;
 	if (data->precipitation_amount > PrepBounds.Rbound) {
@@ -34,9 +34,11 @@ WeatherPriority* CalculatePriotity(WeatherData* data) {
 		resultVector[3] = _Wind;
 	}
 	for (int i = 0; i < max_events; i++) {
-		if (data->event[i] != 0)
+		if (data->event[i][0] != 0) {
 			resultVector[4] = _Event;
+		}
 	}
+
 	return resultVector;
 }
 
@@ -81,6 +83,8 @@ WeatherPriorityData FormPriortyData(WeatherData* data, WeatherPriority* priority
 			result.events = data->event;
 		}
 	}
+
+
 	return result;
 }
 

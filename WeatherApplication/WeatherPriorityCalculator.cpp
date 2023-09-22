@@ -1,0 +1,3 @@
+#ifndef WeatherPriorityCalculatorDefined _
+#define WeatherPriorityCalculatorDefined _
+#endif

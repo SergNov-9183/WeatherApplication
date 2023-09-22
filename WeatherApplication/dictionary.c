@@ -16,7 +16,7 @@ int firstUse = 1;
 int random(int count) {
     if (firstUse == 1) {
         firstUse = 0;
-        srand((unsigned int)time(NULL));
+        srand(time(NULL));
     }
     return rand() % count;
 }

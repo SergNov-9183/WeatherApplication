@@ -18,9 +18,6 @@
     <ClCompile Include="WeatherApplication.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="WeatherPriorityCalculator.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="dictionary.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -28,9 +25,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Weather_pattern_selector_and_definer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

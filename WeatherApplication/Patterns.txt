@@ -55,7 +55,7 @@ _Event
 
 _Temperature
 Согласно <183 data>, температура ночью будет <401 fluctuate> от /min_night/ градусов до /max_night/ градусов Цельсия. Дневные <161 values> столбиков термометров <42123 vary> вплоть до /min_day/ - /max_day/ градусов Цельсия. <0 however>, по ощущениям, будет от /min_perc./ до /max_perc./.
-По полученным <163 data>, столбики термометров не поднимутся выше /max_day/ градусов, и температура будет <401 fluctuate> в <166 limits> от /min_day/ до /max_day/ градусов по Цельсию. <0 pay_attention> ночные температуры. Они <42123 fluctuate> от /min_night/ град. до /max_night/ град. <0 celsius>. В связи с другими погодными характеристиками температура ощущаться также будет иначе, в <166 limits> /min_perc./ - /max_perc./ градусов <0 celsius>.
+По полученным <163 data>, столбики термометров не поднимутся выше /max_day/ градусов, и температура будет <401 fluctuate> в <166 limits> от /min_day/ до /max_day/ градусов по Цельсию. <0 pay_attention> ночные температуры. Они <42123 fluctuate> от /min_night/ град. до /max_night/ град. <0 celsius>. 
 
 
 _Precipitation

@@ -1,0 +1,3 @@
+<Greetings>. Прогноз погоды. 
+14 января 2021 г:
+Ох уж эта жара... Не <0 recommend> выходить под палящее солнце без головного убора. По полученным <163 data>, столбики термометров не поднимутся выше /max_day/ градусов, и температура будет <401 fluctuate> в <166 limits> от /min_day/ до /max_day/ градусов по Цельсию. <0 pay_attention> ночные температуры. Они <42123 fluctuate> от /min_night/ град. до /max_night/ град. <0 celsius>.  Обратите внимание на <164 difficulties> с <115 HEAVY_PRECIPITATION> в Вашем регионе. <211 lengthy> <111 HEAVY_PRECIPITATION> (за сутки /perc./ мм <102 SUBSTANCE>) может <400 worsen> дорожную <134 obstanovku>, будьте <36 careful>! 

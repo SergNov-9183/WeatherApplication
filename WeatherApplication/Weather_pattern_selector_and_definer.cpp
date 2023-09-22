@@ -1,8 +1,10 @@
 #include "Weather_pattern_definer.h"
 #include "Weather_pattern_selector.h"
 
+#include <time.h>
 
-unsigned short FindIndexThroughWord(char Pat[WHOLE_PAT][PAT_LEN], const char Code[], unsigned short start)
+
+int FindIndexThroughWord(char Pat[WHOLE_PAT][PAT_LEN], const char Code[], unsigned short start)
 {
 	unsigned short index = start;
 	while ((strcmp(Pat[index], Code)) != 0)
@@ -11,7 +13,7 @@ unsigned short FindIndexThroughWord(char Pat[WHOLE_PAT][PAT_LEN], const char Cod
 	return index;
 }
 
-unsigned short FindIndexThroughSymbol(char Pat[WHOLE_PAT][PAT_LEN], const char Code, unsigned short start)
+int FindIndexThroughSymbol(char Pat[WHOLE_PAT][PAT_LEN], const char Code, unsigned short start)
 {
 	unsigned short index = start;
 	while (Pat[index][0] != Code)
@@ -30,14 +32,14 @@ void Pat2Text(char Pat[][PAT_LEN], const char Operation[], const char Phenomenon
 		start = FindIndexThroughWord(Pat, Phenomenon, start) + 1; if (strlen(Character))
 		{
 			start = FindIndexThroughWord(Pat, Character, start) + 1;
-			finish = (unsigned short)fmin(FindIndexThroughSymbol(Pat, '/', start) - 1, FindIndexThroughSymbol(Pat, '\n', start) - 1);
+			finish = fmin(FindIndexThroughSymbol(Pat, '/', start) - 1, FindIndexThroughSymbol(Pat, '\n', start) - 1);
 			index = (rand() % (finish - start + 1)) + start;
 			Pat[index][strlen(Pat[index]) - 1] = ' ';
 			fprintf(fText, "%s", Pat[index]);
 		}
 		else
 		{
-			finish = (unsigned short)fmin(FindIndexThroughSymbol(Pat, '_', start) - 1, FindIndexThroughSymbol(Pat, '\n', start) - 1);
+			finish = fmin(FindIndexThroughSymbol(Pat, '_', start) - 1, FindIndexThroughSymbol(Pat, '\n', start) - 1);
 			index = (rand() % (finish - start + 1)) + start;
 			Pat[index][strlen(Pat[index]) - 1] = ' ';
 			fprintf(fText, "%s", Pat[index]);
@@ -57,17 +59,18 @@ void Pat2Text(char Pat[][PAT_LEN], const char Operation[], const char Phenomenon
 
 void Selector(WeatherPriority* WPriority, WeatherPriorityData* WPdata)
 {
+
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	unsigned short index = 0, start = 0, finish = 0;
 	FILE* fPat = fopen("Patterns.txt", "rt");
 	FILE* fText = fopen("Assistive_output.txt", "wt");
 	char Pat[WHOLE_PAT][PAT_LEN] = { 0 };
-	srand(_getpid());
+	srand(time(NULL));
 	while (!feof(fPat))
 		fgets(Pat[index++], PAT_LEN, fPat);
 
-	fprintf(fText, "%s", "<Greetings>! ");
+	fprintf(fText, "%s", "<Greetings>. ");
 
 	Pat2Text(Pat, "#Announcement\n", "", "", fText);
 	fprintf(fText, "\n");
@@ -78,33 +81,33 @@ void Selector(WeatherPriority* WPriority, WeatherPriorityData* WPdata)
 
 	switch (WPdata->date.month)
 	{
-	case(1):	fprintf(fText, "ÿíâàðÿ ");
+	case(1):	fprintf(fText, "января ");
 		break;
-	case(2):	fprintf(fText, "ôåâðàëÿ ");
+	case(2):	fprintf(fText, "февраля ");
 		break;
-	case(3):	fprintf(fText, "ìàðòà ");
+	case(3):	fprintf(fText, "марта ");
 		break;
-	case(4):	fprintf(fText, "àïðåëÿ ");
+	case(4):	fprintf(fText, "апреля ");
 		break;
-	case(5):	fprintf(fText, "ìàÿ ");
+	case(5):	fprintf(fText, "мая ");
 		break;
-	case(6):	fprintf(fText, "èþíÿ ");
+	case(6):	fprintf(fText, "июня ");
 		break;
-	case(7):	fprintf(fText, "èþëÿ ");
+	case(7):	fprintf(fText, "июля ");
 		break;
-	case(8):	fprintf(fText, "àâãóñòà ");
+	case(8):	fprintf(fText, "августа ");
 		break;
-	case(9):	fprintf(fText, "ñåíòÿáðÿ ");
+	case(9):	fprintf(fText, "сентября ");
 		break;
-	case(10):	fprintf(fText, "îêòÿáðÿ ");
+	case(10):	fprintf(fText, "октября ");
 		break;
-	case(11):	fprintf(fText, "íîÿáðÿ ");
+	case(11):	fprintf(fText, "ноября ");
 		break;
-	case(12):	fprintf(fText, "äåêàáðÿ ");
+	case(12):	fprintf(fText, "декабря ");
 		break;
 	}
 
-	fprintf(fText, "%u ã:\n", WPdata->date.year);
+	fprintf(fText, "%u г:\n", WPdata->date.year);
 
 	if (WPriority[1] == _Temperature)
 	{
@@ -142,10 +145,10 @@ void Selector(WeatherPriority* WPriority, WeatherPriorityData* WPdata)
 		Pat2Text(Pat, "#Standard_description\n", "_Wind\n", "/General_OK\n", fText);
 		Pat2Text(Pat, "#Standard_description\n", "_Wind\n", "/General_Direction\n", fText);
 	}
-
-	if (WPriority[4] == _Event)
+	if (WPriority[4] == _Event) {
 		Pat2Text(Pat, "#Special_decription\n", "_Event\n", "", fText);
-
+	
+	}
 	fclose(fPat);
 	fclose(fText);
 
@@ -176,7 +179,7 @@ void freeStr(char* Str)
 	return;
 }
 
-void Definition(WeatherPriorityData* WPdata)
+void Definition(WeatherPriorityData* WPdata, unsigned short num)
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -302,7 +305,7 @@ void Definition(WeatherPriorityData* WPdata)
 					{
 						strcat(Example, WPdata->events[pos]);
 						if (strlen(WPdata->events[pos + 1]) && !strlen(WPdata->events[pos + 2]))
-							strcat(Example, " è ");
+							strcat(Example, " и ");
 						if (strlen(WPdata->events[pos + 1]) && strlen(WPdata->events[pos + 2]))
 							strcat(Example, ", ");
 					}
@@ -319,12 +322,27 @@ void Definition(WeatherPriorityData* WPdata)
 		}
 	}
 
-	FILE* fOutput = fopen("Space_text.txt", "wt");
-	for (int i = 0; i < 2; ++i)
-		fprintf(fOutput, "%s", Ex[i]);
-	fprintf(fOutput, "%s", Message);
+	
 
-	fclose(fOutput);
+	if (!num)
+	{
+		FILE* fOutput = fopen("Space_text.txt", "wt");
+		for (int i = 0; i < 2; ++i)
+			fprintf(fOutput, "%s", Ex[i]);
+		fprintf(fOutput, "%s\n\n", Message);
+		fclose(fOutput);
+	}
+	else
+	{
+		FILE* fOutput = fopen("Space_text.txt", "at");
+		fprintf(fOutput, "%s", Ex[1]);
+		fprintf(fOutput, "%s\n\n", Message);
+		fclose(fOutput);
+	}
+			
+	
+
+	
 
 	return;
 }

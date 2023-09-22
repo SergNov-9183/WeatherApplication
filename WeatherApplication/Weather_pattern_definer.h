@@ -13,7 +13,9 @@ void Copy2Str(char Source[MES_LEN], unsigned short start, unsigned short finish,
 
 void freeStr(char* Str);
 
-void Definition(WeatherPriorityData* WPdata);
+void Definition(WeatherPriorityData* WPdata, unsigned short num);
 
 #endif //WEATHER_PATTERN_DEFINER_H
+
+
 

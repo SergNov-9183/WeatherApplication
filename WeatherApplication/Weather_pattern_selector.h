@@ -1,5 +1,5 @@
-#ifndef WEATHER_PATTERN_SELECTOR_H
-#define WEATHER_PATTERN_SELECTOR_H
+#ifndef WEATHER_PATTERN_SELECTOR_H _
+#define WEATHER_PATTERN_SELECTOR_H _
 #define _CRT_SECURE_NO_WARNINGS
 #define WHOLE_PAT 128
 #define PAT_LEN 512
@@ -13,9 +13,9 @@
 #include <windows.h>
 
 
-unsigned short FindIndexThroughWord(char Pat[WHOLE_PAT][PAT_LEN], const char Code[], unsigned short start);
+int FindIndexThroughWord(char Pat[WHOLE_PAT][PAT_LEN], const char Code[], unsigned short start);
 
-unsigned short FindIndexThroughSymbol(char Pat[WHOLE_PAT][PAT_LEN], const char Code, unsigned short start);
+int FindIndexThroughSymbol(char Pat[WHOLE_PAT][PAT_LEN], const char Code, unsigned short start);
 
 void Pat2Text(char Pat[][PAT_LEN], const char Operation[], const char Phenomenon[], const char Character[], FILE* fText);
 

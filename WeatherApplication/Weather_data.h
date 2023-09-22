@@ -1,5 +1,5 @@
-#ifndef Weather_data_H
-#define Weather_data_H
+#ifndef Weather_data_H _
+#define Weather_data_H _
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
@@ -55,7 +55,6 @@ void DashSkip(char str[], unsigned short* i) {
 void WeatherToZero(WeatherData* weather_data) {
 	const char zeroStr[string_len] = { 0 };
 	const unsigned short zeroDir[NW + 1] = { 0 };
-
 	weather_data->date.day = 0;
 	weather_data->date.month = 0;
 	weather_data->date.year = 0;
@@ -192,14 +191,15 @@ void GetPrecipitation(char dest[], char str[], unsigned str_num, unsigned short 
 		dest[3] = 0;
 	}
 	else {
-		char precipitation[precipitation_quan][string_len] = { "дождь\0", "снег\0", "град\0", "ливень\0", "снегопад\0" };
+		char precipitation[precipitation_quan][string_len] = { {-28,-18,-26,-28,-4,0},
+			{-15,-19,-27,-29,0},{-29,-16,-32,-28,0},{-21,-24,-30,-27,-19,-4},{-15,-19,-27,-29, -18,-17,-32,-28} };
+		// { "дождь\0", "снег\0", "град\0", "ливень\0", "снегопад\0" };
 		unsigned short isPrecipitation = 0;
 		for (int j = 0; j < precipitation_quan && !isPrecipitation; ++j) {
 			if (!strcmp(precipitation[j], dest))
 				isPrecipitation = 1;
 		}
 		if (!isPrecipitation) {
-			setlocale(LC_ALL, "Russian");
 			fprintf(stderr, "The program does not process such an precipitation: <%s>\nLine - %d", dest, str_num);
 			exit(1);
 		}
@@ -319,7 +319,7 @@ void StrToWeather(char str[], unsigned str_num, WeatherData* weather_data) {
 	GetWindSpeed(&(weather_data->wind_data.min_gusts), &(weather_data->wind_data.max_gusts), str, str_num, &i);
 
 	DashSkip(str, &i);
-	for (; str[i] != ' ' && str[i] != '\t'; ++i) {
+	for (; str[i] != ' ' && str[i] != '\t' && str[i]!='\n' && str[i]; ++i) {
 		if (str[i] < '0' || str[i] > '9') {
 			fprintf(stderr, "Incorrect pressure input format\nLine - %u", str_num);
 			exit(1);
@@ -330,11 +330,11 @@ void StrToWeather(char str[], unsigned str_num, WeatherData* weather_data) {
 	DashSkip(str, &i);
 	int k = 0;
 	
-	while (str[i] != '\n') {
+	while (str[i] != '\n' && str[i]) {
 		int j = 0;
-		while (str[i] != ' ' && str[i] != '\n' && str[i]!=',') {
+		while (str[i] != ' ' && str[i] != '\n' && str[i]!=',' && str[i]) {
 				if ((str[i] < -32 || str[i] > -1) && str[i] != -72) {
-					fprintf(stderr, "Incorrect precipitation input format\nLine - %u", str_num);
+					fprintf(stderr, "Incorrect event input format\nLine - %u", str_num);
 					exit(1);
 				}
 				weather_data->event[k][j] = str[i];
@@ -347,7 +347,9 @@ void StrToWeather(char str[], unsigned str_num, WeatherData* weather_data) {
 		DashSkip(str, &i);
 	}
 	k = 0;
-	char events[events_quan][string_len] = { "торнадо\0", "гроза\0", "туман\0", "гололедица\0" };
+	char events[events_quan][string_len] = { {-14,-18,-16,-19,-32,-28,-18,0},{-29,-16,-18,-25,-32,0},
+		{-14,-13,-20,-32,-19,0},{-29,-18,-21,-18,-21,-27,-28,-24,-10,-32,0} };
+	//{ "торнадо\0", "гроза\0", "туман\0", "гололедица\0" };
 	while (weather_data->event[k][0]) {
 		unsigned short isEvent = 0;
 		for (int i = 0; i < events_quan && !isEvent; ++i) {
@@ -355,7 +357,6 @@ void StrToWeather(char str[], unsigned str_num, WeatherData* weather_data) {
 				isEvent = 1;
 		}
 		if (!isEvent) {
-			setlocale(LC_ALL, "Russian");
 			fprintf(stderr, "The program does not process such an event: <%s>\nLine - %u", weather_data->event[k], str_num);
 			exit(1);
 		}

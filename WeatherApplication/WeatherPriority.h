@@ -1,5 +1,5 @@
-#ifndef WeatherPriorityDataDefined
-#define WeatherPriorityDataDefined
+#ifndef WeatherPriorityDataDefined _
+#define WeatherPriorityDataDefined _
 
 typedef enum  { _Precipitation, _Temperature, _Wind, _Pressure, _Event, None } WeatherPriority;
 typedef enum  {RAIN, SNOW, HAIL, RAINSTORM, SNOWSTORM} _PrecipitationValue;
