@@ -1,0 +1,13 @@
+﻿  dictionary.c
+  load_dictionary.c
+  Main.cpp
+  WeatherApplication.cpp
+D:\GitHub\WeatherApplication\WeatherApplication\WeatherPriorityCalculator.h(81,31): warning C4047: =: "char **" отличается по уровням косвенного обращения от "char (*)[256]"
+D:\GitHub\WeatherApplication\WeatherApplication\WeatherApplication.cpp(21,25): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "char"
+D:\GitHub\WeatherApplication\WeatherApplication\WeatherApplication.cpp(21,22): warning C4024: strcat: различные типы для формального и фактического параметров 2
+D:\GitHub\WeatherApplication\WeatherApplication\WeatherApplication.cpp(26,25): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "char"
+D:\GitHub\WeatherApplication\WeatherApplication\WeatherApplication.cpp(26,22): warning C4024: strcat: различные типы для формального и фактического параметров 2
+  WeatherPriorityCalculator.cpp
+  Weather_pattern_selector_and_definer.cpp
+  Создание кода...
+  WeatherApplication.vcxproj -> D:\GitHub\WeatherApplication\x64\Debug\WeatherApplication.exe
